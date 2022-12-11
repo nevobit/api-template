@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",
+    "cloudinary": "^1.32.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.10.2",
     "http-status": "^1.5.3",

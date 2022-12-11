@@ -1,5 +1,5 @@
 import { FastifyRequest } from 'fastify';
-import { NormalizedRequest, RequestInterface } from '../../types/normalized-request';
+import { NormalizedRequest, RequestInterface } from '../../types';
 import { alertOverrideConflict } from '../alert-override-conflict';
 export const normalizeFastifyRequest =  <R extends RequestInterface = RequestInterface>({
     method,
