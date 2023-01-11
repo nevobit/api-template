@@ -15,18 +15,18 @@ export enum RouteMethod {
 export const makeFastifyRoute = (
     method: RouteMethod,
     url: string,
-    authFunction: (req: NormalizedRequest) => Promise<unknown>,
     handler: (
         req: FastifyRequest,
         reply: FastifyReply
     ) => Promise<void>,
+    authFunction?: (req: NormalizedRequest) => Promise<unknown>,
     extraOptions?: Partial<Omit<RouteOptions, 'handler'>>,
 ) : RouteOptions => {
     const enhanceHandler: RouteOptions['handler'] = 
         async (request: FastifyRequest,
                reply: FastifyReply) => {
                 const normalizedReq = normalizeFastifyRequest(request);
-                await authFunction(normalizedReq);
+                // await authFunction(normalizedReq);
                 return handler(request, reply);
             };
     return {

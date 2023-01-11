@@ -8,6 +8,7 @@ import fastifyCors from "@fastify/cors";
 // @ts-ignore
 import {version, name} from '../package.json';
 import { registerRoutes } from './routes';
+import { initMariaDb } from './data-sources/mariadb';
 
 dotenv.config();
 const PORT = Number(process.env.PORT);
@@ -15,6 +16,8 @@ const {HOST} = process.env;
 
 (async () => {
     // TODO: data sources
+
+    await initMariaDb();
 
     const server = fastify({
         logger: true,
