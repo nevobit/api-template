@@ -1,5 +1,9 @@
 import mariadb, {createPool} from 'mariadb';
 import mysql from 'mysql2';
+import { DataSource } from 'typeorm';
+import { EnterpriseSchema } from '../../types/enterprise/enterprise-schema';
+import { UserSchema } from '../../types/user/user-schema';
+import { VideoSchema } from '../../types/video/video-schema';
 
 export interface InitMariadbOptions {
     mariadbUrl?: string;
@@ -19,10 +23,26 @@ export const initMariaDb = async () : Promise<void> => {
             connectionLimit: 100
         }
 
-        const connection = mysql.createConnection(`mysql://dkn9xrprdkamw6wepkwt:pscale_pw_vciHwJXQpP5cgNaBwWYtMrrxNLkSMrCqKMLsyg4nexR@us-east.connect.psdb.cloud/aprilive-database?ssl={"rejectUnauthorized":true}`)
+        const AppDataSource = new DataSource({
+            type: 'mysql',
+            host: 'us-east.connect.psdb.cloud',
+            port: 3306,
+            username:'dkn9xrprdkamw6wepkwt',
+            password: 'pscale_pw_vciHwJXQpP5cgNaBwWYtMrrxNLkSMrCqKMLsyg4nexR',
+            database: 'aprilive-database',
+            entities: [UserSchema],
+            synchronize: true,
+            ssl: {
+                rejectUnauthorized: true, 
+            }
+        })
+
+        await AppDataSource.initialize().then(() => {
+            console.log('Database initialized')
+        }).catch((err) => console.log(err));
+        // const connection = mysql.createConnection(`mysql://dkn9xrprdkamw6wepkwt:pscale_pw_vciHwJXQpP5cgNaBwWYtMrrxNLkSMrCqKMLsyg4nexR@us-east.connect.psdb.cloud/aprilive-database?ssl={"rejectUnauthorized":true}`)
         // await mariadb.createConnection(`mariadb://${MARIADB_USER}:${MARIADB_PASSWORD}@apprilive-database-db00008688.mdb0002418.db1.skysql.net:5001/aprilive-database`)
         // await mariadb.createPool(config);
-        console.info('Mssql successfully connected');
         // connection.end();
     }catch(error){
         console.info('Mariadb connection error', error)

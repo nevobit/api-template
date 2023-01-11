@@ -3,7 +3,7 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { Video } from "./index";
 
 @Entity("Video")
-export class VideoSchema implements Video {
+export class VideoSchema extends BaseEntity {
   @PrimaryColumn({ unique: true })
   uuid: string;
 
@@ -37,8 +37,8 @@ export class VideoSchema implements Video {
   @Column()
   privacity: string;
 
-  @Column()
-  comments: [];
+  @Column('simple-json')
+  comments: [{uuid: string, text: string, user: string}];
 
   @Column()
   location: string;

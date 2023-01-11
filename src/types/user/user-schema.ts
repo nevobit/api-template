@@ -3,7 +3,7 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { User } from "./index";
 
 @Entity("User")
-export class UserSchema implements User {
+export class UserSchema extends BaseEntity {
   @PrimaryColumn({ unique: true })
   uuid: string;
 
@@ -21,66 +21,66 @@ export class UserSchema implements User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   gender: string;
 
   @Column()
   phone: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   birthday: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   username: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   country: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   province: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   city: string;
 
-  @Column()
-  preferences: [];
+  @Column('simple-json', {nullable: true})
+  preferences: [{uuid: string, name: string}];
 
-  @Column()
+  @Column({default: 0})
   salary: number;
 
-  @Column()
+  @Column({default: "Masculino"})
   summary: string;
 
-  @Column()
+  @Column('simple-array', {nullable: true})
   links: string[];
 
-  @Column()
+  @Column({default: "Masculino"})
   titular: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   video: string;
 
-  @Column()
+  @Column({default: "Masculino"})
   photo: string;
 
-  @Column()
-  social_netwoeks: [];
+  @Column('simple-json', {nullable: true})
+  social_netwoeks: [{uuid: string, name: string}];
 
-  @Column()
-  experience: [];
+  @Column('simple-json', {nullable: true})
+  experience: [{uuid: string, name: string}];
 
-  @Column()
-  skills: [];
+  @Column('simple-json', {nullable: true})
+  skills: [{uuid: string, name: string}];
 
-  @Column()
-  langueges: [];
+  @Column('simple-json', {nullable: true})
+  langueges: [{uuid: string, name: string}];
 
-  @Column()
+  @Column('simple-array', {nullable: true})
   followers: string[];
 
-  @Column()
+  @Column('simple-array', {nullable: true})
   followed: string[];
 
-  @Column()
+  @Column('simple-array', {nullable: true})
   views: string[];
 }
