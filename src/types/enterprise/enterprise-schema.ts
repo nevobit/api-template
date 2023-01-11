@@ -1,9 +1,9 @@
 import { IsEmail, IsNotEmpty } from "class-validator";
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
-import { User } from "./index";
+import { Enterprise } from "./index";
 
-@Entity("User")
-export class UserSchema implements User {
+@Entity("Enterprise")
+export class EnterpriseSchema implements Enterprise {
   @PrimaryColumn({ unique: true })
   uuid: string;
 
